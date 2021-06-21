@@ -271,7 +271,7 @@ public class DefaultCameraScan extends CameraScan {
                     mCameraProviderFuture.get().unbindAll();
                 }
                 //绑定到生命周期
-                mCamera = mCameraProviderFuture.get().bindToLifecycle(mLifecycleOwner, cameraSelector, preview, imageAnalysis);
+                mCamera = mCameraProviderFuture.get().bindToLifecycle(mLifecycleOwner, cameraSelector, preview, new ImageCapture.Builder().build()/* 为了解决自动获取焦点问题 */, imageAnalysis);
             }catch (Exception e){
                 LogUtils.e(e);
             }
