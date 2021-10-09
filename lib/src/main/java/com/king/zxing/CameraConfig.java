@@ -3,6 +3,7 @@ package com.king.zxing;
 import androidx.annotation.NonNull;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ImageAnalysis;
+import androidx.camera.core.ImageCapture;
 import androidx.camera.core.Preview;
 
 /**
@@ -27,6 +28,11 @@ public class CameraConfig {
 
     @NonNull
     public ImageAnalysis options(@NonNull ImageAnalysis.Builder builder){
+        return builder.build();
+    }
+
+    @NonNull
+    public ImageCapture options(@NonNull ImageCapture.Builder builder){
         return builder.build();
     }
 
