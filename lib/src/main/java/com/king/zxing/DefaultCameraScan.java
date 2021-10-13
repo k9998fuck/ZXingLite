@@ -269,8 +269,7 @@ public class DefaultCameraScan extends CameraScan {
                     image.close();
                 });
                 //图像采集
-                ImageCapture imageCapture = mCameraConfig.options(new ImageCapture.Builder()
-                        .setTargetResolution(mTargetSize));
+                ImageCapture imageCapture = mCameraConfig.options(new ImageCapture.Builder());
                 if(mCamera != null){
                     mCameraProviderFuture.get().unbindAll();
                 }
