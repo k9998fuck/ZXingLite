@@ -171,6 +171,8 @@ public class ViewfinderView extends View {
      * 扫码框占比
      */
     private float frameRatio;
+    private float frameWidthRatio;
+    private float frameHeightRatio;
 
     /**
      * 扫码框内间距
@@ -292,6 +294,8 @@ public class ViewfinderView extends View {
         frameLineWidth = (int)array.getDimension(R.styleable.ViewfinderView_frameLineWidth,TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,1,getResources().getDisplayMetrics()));
         scannerAnimationDelay = array.getInteger(R.styleable.ViewfinderView_scannerAnimationDelay,20);
         frameRatio = array.getFloat(R.styleable.ViewfinderView_frameRatio,0.625f);
+        frameWidthRatio = array.getFloat(R.styleable.ViewfinderView_frameWidthRatio,-1f);
+        frameHeightRatio = array.getFloat(R.styleable.ViewfinderView_frameHeightRatio,-1f);
         framePaddingLeft = array.getDimension(R.styleable.ViewfinderView_framePaddingLeft,0);
         framePaddingTop = array.getDimension(R.styleable.ViewfinderView_framePaddingTop,0);
         framePaddingRight = array.getDimension(R.styleable.ViewfinderView_framePaddingRight,0);
@@ -340,11 +344,19 @@ public class ViewfinderView extends View {
         int size = (int)(Math.min(width,height) * frameRatio);
 
         if(frameWidth <= 0 || frameWidth > width){
-            frameWidth = size;
+            if (frameWidthRatio > 0f && frameWidthRatio <= 1f) {
+                frameWidth = (int) (width * frameWidthRatio);
+            } else {
+                frameWidth = size;
+            }
         }
 
         if(frameHeight <= 0 || frameHeight > height){
-            frameHeight = size;
+            if (frameHeightRatio > 0f && frameHeightRatio <= 1f) {
+                frameHeight = (int) (height * frameHeightRatio);
+            } else {
+                frameHeight = size;
+            }
         }
 
         if(labelTextWidth <= 0){
